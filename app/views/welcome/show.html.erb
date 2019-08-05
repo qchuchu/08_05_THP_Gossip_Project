@@ -12,17 +12,16 @@
 
     <div class="container">
       <% @gossips.each do |gossip| %>
-        <div class="card my-4 text-white bg-secondary">
-          <div class="card-body">
-            <div class="container">
-              <div class="row h-100">
-                <div class="col-lg-1 my-auto text-center">
-                    <i class="fas fa-comment-alt fa-3x"></i>
-                </div>
-                <div class="col-lg-11 my-2 text-justify">
-                  <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
-                  <p class="card-text"><%= gossip.title %></p>
-                </div>
+        <div class="card mb-3 bg-light border-primary border-left-0">
+          <div class="row no-gutters">
+            <div class="col-2 col-sm-1 m-auto text-center">
+              <i class="fas fa-comment-alt fa-3x"></i>
+            </div>
+            <div class="col-10 col-sm-11">
+              <div class="card-body">
+                <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
+                <p class="card-text"><%= gossip.title %></p>
+                <p class="card-text"><%= link_to "Voir Gossip", gossip_path(gossip.id) %> / <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id) %></p>
               </div>
             </div>
           </div>
