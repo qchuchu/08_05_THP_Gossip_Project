@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1 class='text-center'><%= @user.first_name %> <%= @user.last_name %></h1>
+    <div class="container">
+      <% @user.gossips.each do |gossip| %>
+        <div class="card my-4 text-white bg-secondary">
+          <div class="card-body">
+            <div class="container">
+              <div class="row h-100">
+                <div class="col-lg-1 my-auto text-center">
+                    <i class="fas fa-comment-alt fa-3x"></i>
+                </div>
+                <div class="col-lg-11 my-2 text-justify">
+                  <h5 class="card-title"><%= gossip.title %></h5>
+                  <p class="card-text"><%= gossip.content %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

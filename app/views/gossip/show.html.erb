@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Voici le gossip demandé</h1>
+    <h2> <%= @gossip.user.first_name %> a dit :</h2>
+    <h3><%= @gossip.title %></h3>
+    <p><%= @gossip.content %></p>
+
+    <p><%= link_to "Aller sur la page de l'auteur", user_path(@gossip.user.id) %></p>
+  </body>
+</html>
