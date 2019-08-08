@@ -24,7 +24,7 @@
           <%= select_tag 'tags', options_for_select(@tags.collect{ |u| [u.title, u.id] }), multiple: true, class: 'custom-select' %>
         </div>
         <div class="form-group">
-          <%= submit_tag "Create Post", class: 'btn btn-primary' %>
+          <%= submit_tag "Create Gossip", class: 'btn btn-primary' %>
         </div>
 
       <% end %>

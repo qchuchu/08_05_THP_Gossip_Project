@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     comment = params[:comment]
-    user = User.find_by(first_name: 'Ano', last_name: 'Nymous')
+    user = current_user
     gossip = Gossip.find(comment[:id])
     @comment = Comment.create(content: comment[:content])
     user.comments << @comment
@@ -12,6 +12,10 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    if current_user != @comment.user
+      flash[:access_denied] = 'You are not allowed to edit this comment'
+      redirect_back fallback_location: gossip_path(@comment.commentable_id)
+    end
   end
 
   def update

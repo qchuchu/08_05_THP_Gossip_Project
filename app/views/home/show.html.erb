@@ -6,15 +6,13 @@
   </head>
   <body>
     <div class="container">
-      <h1>Bienvenue à toi jeune padawan !</h1>
-      <form action="/" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <div class="form-group">
-          <label for="username">Quel est ton prénom ?</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Nelson" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      <div class="jumbotron">
+        <p><img src="https://file1.closermag.fr/extension/closermag/design/closermag/images/layout/main-logo.png" alt=""></p>
+        <p class="lead">THE GOSSIP PROJECT</p>
+        <hr class="my-4">
+        <h3>Sois au courant de tous les gossips grâce à ATHENA NOVOTEL</h3>
+        <p><%= link_to "S'inscrire", new_user_path, class: "btn btn-primary" %> <%= link_to "Se connecter", new_session_path, class: "btn btn-primary" %></p>
+      </div>
     </div>
   </body>
 </html>

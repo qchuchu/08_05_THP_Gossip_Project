@@ -1,24 +1,41 @@
-# README
+#___THP - The Gossip Project___
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> Creation Date : 2019/08/05
+> Last Update Date : 2019/08/08
+> Author : Quentin Churet
+> **Description** : This WebApp Rails have been created for the 5th week of The Hacking Project. It's a small Social Network where people can publish gossips, comment them and like them.
 
-Things you may want to cover:
+-------------------------------------------------------
 
-* Ruby version
+## Information pour les correcteurs
 
-* System dependencies
+:micro: Aaaaaand we are today with the correcteur, comment vas-tu aujourd'hui? Tout le monde il t'aime bien tu le sais.
+Pour que tout se passe bien, voici quelques instructions à suivre
 
-* Configuration
+### 1) Git clone mon repository sur ton PC
 
-* Database creation
+`git clone git@github.com:qchuchu/08_05_THP_Gossip_Project.git`
 
-* Database initialization
+### 2) Bundle Install, Creation de BDD, Migration & Seeds
 
-* How to run the test suite
+D'abord on installe toutes les gems
 
-* Services (job queues, cache servers, search engines, etc.)
+`bundle install`
 
-* Deployment instructions
+Puis on crée la Base de Données
 
-* ...
+`rails db:create`
+
+Ensuite on effectue toutes les migrations
+
+`rails db:migrate`
+
+Et on termine par un petit seeds pour remplir toute la base de données
+
+`rails db:seed`
+
+### 3) On lance le serveur
+
+`rails server`
+
+Et on se rend directement sur http://localhost:3000

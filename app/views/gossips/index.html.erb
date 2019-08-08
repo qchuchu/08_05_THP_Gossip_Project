@@ -11,8 +11,8 @@
           <p><%= flash[:success] %></p>
         </div>
       <% end %>
-      <h1>Welcome Visiteur !</h1>
-      <!-- User.find_by(id: session[:user_id]).first_name -->
+      <h1>Welcome <%= current_user.first_name %> !</h1>
+      <!--  -->
       <p><%= link_to "Créer un nouveau Gossip", new_gossip_path, class: "btn btn-primary", role: "button" %></p>
       <h2>Voici la liste de tous les gossips :</h2>
     </div>
@@ -29,7 +29,18 @@
                 <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
                 <p class="card-text"><%= gossip.title %></p>
                 <p class="card-text"><strong>Nombre de commentaires : </strong><%= gossip.comments.count %></p>
-                <p class="card-text"><%= link_to "Voir Gossip", gossip_path(gossip.id), :class => 'btn btn-primary' %> <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id), :class => 'btn btn-primary' %> <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %></p>
+                <p class="card-text">
+                  <%= link_to "Voir Gossip", gossip_path(gossip.id), :class => 'btn btn-primary' %>
+                  <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id), :class => 'btn btn-primary' %>
+                  <% if gossip.is_liked?(current_user) %>
+                    <%= link_to "Je n'aime plus (#{gossip.num_likes})", gossip_like_path(gossip.id, gossip.like_id(current_user)), :class => 'btn btn-danger', method: 'delete' %>
+                  <% else %>
+                    <%= link_to "J'aime (#{gossip.num_likes})", gossip_likes_path(gossip.id), :class => 'btn btn-success', method: 'post' %>
+                  <% end %>
+                  <% if current_user == gossip.user %>
+                    <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %>
+                  <% end %>
+                </p>
               </div>
             </div>
           </div>

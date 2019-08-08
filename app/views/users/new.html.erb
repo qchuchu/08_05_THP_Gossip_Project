@@ -65,7 +65,7 @@
           <div class="alert alert-danger" role="alert">
             <p>Nous n'avons pas réussi à vous enregistrer pour la (ou les) raison(s) suivante(s) :</p>
             <ul>
-              <% @guser.errors.full_messages.each do |message| %>
+              <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
             </ul>

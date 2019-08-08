@@ -1,6 +1,6 @@
 module SessionsHelper
   def current_user
-    User.find(session[:user_id])
+    session[:user_id].nil? ? false : User.find(session[:user_id]) 
   end
 
   def log_in(user)

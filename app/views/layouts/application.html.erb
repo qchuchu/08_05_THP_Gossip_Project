@@ -21,7 +21,11 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-      <%= link_to "TheGossipProject", gossips_path, class: "navbar-brand" %>
+      <% if logged_in? %>
+        <%= link_to "TheGossipProject", gossips_path, class: "navbar-brand" %>
+      <% else %>
+        <%= link_to "TheGossipProject", root_path, class: "navbar-brand" %>
+      <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,17 +33,48 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%= link_to "Home", gossips_path, class: "nav-link" %>
+            <% if logged_in? %>
+              <%= link_to "Home", gossips_path, class: "nav-link" %>
+            <% else %>
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/team">Team</a>
+            <%= link_to "Team", '/team', class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
+            <%= link_to "Contact", '/contact', class: "nav-link" %>
           </li>
+          <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to "Dashboard", user_path(session[:user_id]), class: "nav-link" %>
+          </li>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <% if logged_in? %>
+            <li class="nav-item">
+              <%= link_to "Logout", session_path(session[:user_id]), :class => 'nav-link', :'data-method' => 'DELETE' %>
+            </li>
+          <% else %>
+            <li class='nav-item'>
+              <%= link_to "S'inscrire", new_user_path, class: "nav-link" %>
+            </li>
+            <li class='nav-item'>
+              <%= link_to "Se connecter", new_session_path, class: "nav-link" %>
+            </li>
+
+          <% end %>
         </ul>
       </div>
     </nav>
+    <div class="container">
+      <% if !flash[:access_denied].nil? %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:access_denied] %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

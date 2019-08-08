@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   # Page de Login
+  skip_before_action :authenticate_user
   def new
-
   end
 
   # Authentification
@@ -19,5 +19,6 @@ class SessionsController < ApplicationController
   # Logout
   def destroy
     session.delete(:user_id)
+    redirect_to root_path
   end
 end

@@ -32,11 +32,17 @@
               </small></p>
               <p class='card-text'>
                 <%= link_to "Aller sur la page de l'auteur", user_path(@gossip.user.id), :class => 'btn btn-primary' %>
-                <% if @gossip.user.city? %>
-                  <%= link_to "Ville de l'Auteur", city_path(@gossip.user.city_id), :class => 'btn btn-primary' %>
+                <%= link_to "Ville de l'Auteur", city_path(@gossip.user.city_id), :class => 'btn btn-primary' %>
+                <% if current_user == @gossip.user %>
+                  <%= link_to "Modifier le contenu", edit_gossip_path(@gossip.id), :class => 'btn btn-warning' %>
+                  <%= link_to "Supprimer le gossip", gossip_path(@gossip.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %></p>
                 <% end %>
-                <%= link_to "Modifier le contenu", edit_gossip_path(@gossip.id), :class => 'btn btn-warning' %>
-                <%= link_to "Supprimer le gossip", gossip_path(@gossip.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %></p>
+                <% if @gossip.is_liked?(current_user) %>
+                  <%= link_to "Je n'aime plus (#{@gossip.num_likes})", gossip_like_path(@gossip.id, @gossip.like_id(current_user)), :class => 'btn btn-danger', method: 'delete' %>
+                <% else %>
+                  <%= link_to "J'aime (#{@gossip.num_likes})", gossip_likes_path(@gossip.id), :class => 'btn btn-success', method: 'post' %>
+                <% end %>
+
             </div>
           </div>
         </div>
@@ -47,13 +53,24 @@
             </div>
           </div>
         </div>
-        <% @gossip.comments.reverse_each do |comment| %>
+        <% @gossip.comments.each do |comment| %>
           <div class="row no-gutters">
             <div class="col-10 offset-2 col-sm-11 offset-sm-1">
               <div class="card-body">
                 <h5><strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong></h5>
                 <p><%= comment.content %></p>
-                <p><%= link_to 'Modifier le Commentaire', edit_comment_path(comment.id), :class => 'btn btn-warning' %> <%= link_to "Supprimer le commentaire", comment_path(comment.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %></p>
+                <p>
+                  <% if current_user == comment.user %>
+                    <%= link_to 'Modifier le Commentaire', edit_comment_path(comment.id), :class => 'btn btn-warning' %>
+                    <%= link_to "Supprimer le commentaire", comment_path(comment.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %>
+                  <% end %>
+                  <% if comment.is_liked?(current_user) %>
+                    <%= link_to "Je n'aime plus (#{comment.num_likes})", comment_like_path(comment.id, comment.like_id(current_user)), :class => 'btn btn-danger', method: 'delete' %>
+                  <% else %>
+                    <%= link_to "J'aime (#{comment.num_likes})", comment_likes_path(comment.id), :class => 'btn btn-success', method: 'post' %>
+                  <% end %>
+                </p>
+
               </div>
             </div>
           </div>

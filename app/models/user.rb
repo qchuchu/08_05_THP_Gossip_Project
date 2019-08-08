@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :city, optional: true
+  belongs_to :city
   accepts_nested_attributes_for :city
   has_many :gossips, dependent: :destroy
   has_many :comments, dependent: :destroy

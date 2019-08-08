@@ -1,6 +1,7 @@
 class GossipsController < ApplicationController
 
   def index
+    puts current_user.first_name
     @gossips = Gossip.all
   end
 
@@ -15,8 +16,7 @@ class GossipsController < ApplicationController
   def create
     tags = Tag.where(id: params[:tags])
     @gossip = Gossip.new(title: params[:title], content: params[:content])
-    # @gossip.user = current_user
-    @gossip.user = User.last
+    @gossip.user = current_user
     @gossip.tags << tags
     if @gossip.save
       flash[:success] = "Potin bien créé !"
@@ -28,6 +28,10 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
+    if current_user != @gossip.user
+      flash[:access_denied] = 'You are not allowed to edit this gossip'
+      redirect_back fallback_location: gossip_path(params[:id])
+    end
   end
 
   def update

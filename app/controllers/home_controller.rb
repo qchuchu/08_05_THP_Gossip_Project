@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
-  def show
-  end
+  skip_before_action :authenticate_user
 
-  def create
-    session[:username] = params['username']
-    redirect_to gossips_path
+  def show
+    redirect_to gossips_path if logged_in?
   end
 end
