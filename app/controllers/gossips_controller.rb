@@ -1,7 +1,6 @@
 class GossipsController < ApplicationController
 
   def index
-    @first_name = session[:username]
     @gossips = Gossip.all
   end
 
@@ -16,9 +15,11 @@ class GossipsController < ApplicationController
   def create
     tags = Tag.where(id: params[:tags])
     @gossip = Gossip.new(title: params[:title], content: params[:content])
-    @gossip.user = User.find_by(first_name: 'Ano', last_name: 'Nymous')
+    # @gossip.user = current_user
+    @gossip.user = User.last
     @gossip.tags << tags
     if @gossip.save
+      flash[:success] = "Potin bien créé !"
       redirect_to gossips_path
     else
       render :new

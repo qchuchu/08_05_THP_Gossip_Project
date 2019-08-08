@@ -19,8 +19,9 @@ end
   age = rand(18..77)
   email = Faker::Internet.email(name: "#{first_name} #{last_name}", separators: '.')
   city = City.all[i]
+  password = 'helloworld'
   description = "#{first_name} loves to #{Faker::Verb.base} in the nature with #{Faker::Superhero.name}."
-  User.create(first_name: first_name, last_name: last_name, description: description, email: email, age: age, city: city)
+  User.create(first_name: first_name, last_name: last_name, description: description, email: email, age: age, city: city, password: password)
 end
 
 10.times do |i|

@@ -24,13 +24,19 @@
               <h4 class="card-title"><strong><%= @gossip.user.first_name %> <%= @gossip.user.last_name %></strong></h4>
               <h5 class="card-title"><%= @gossip.title %></h5>
               <p class="card-text"><%= @gossip.content %></p>
-              <p class="card-text"><small class="text-muted">Uploaded from <%= @gossip.user.city.city_name %></small></p>
+              <p class="card-text"><small class="text-muted">Uploaded from <%= @gossip.user.city? ? @gossip.user.city.city_name : 'Unknown Place' %></small></p>
               <p class="card-text"><small class="text-muted">
                 <% @gossip.tags.each do |tag| %>
                   #<%= tag.title %>
                 <% end %>
               </small></p>
-              <p class='card-text'><%= link_to "Aller sur la page de l'auteur", user_path(@gossip.user.id), :class => 'btn btn-primary' %> <%= link_to "Ville de l'Auteur", city_path(@gossip.user.city_id), :class => 'btn btn-primary' %> <%= link_to "Modifier le contenu", edit_gossip_path(@gossip.id), :class => 'btn btn-warning' %> <%= link_to "Supprimer le gossip", gossip_path(@gossip.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %></p>
+              <p class='card-text'>
+                <%= link_to "Aller sur la page de l'auteur", user_path(@gossip.user.id), :class => 'btn btn-primary' %>
+                <% if @gossip.user.city? %>
+                  <%= link_to "Ville de l'Auteur", city_path(@gossip.user.city_id), :class => 'btn btn-primary' %>
+                <% end %>
+                <%= link_to "Modifier le contenu", edit_gossip_path(@gossip.id), :class => 'btn btn-warning' %>
+                <%= link_to "Supprimer le gossip", gossip_path(@gossip.id), :class => 'btn btn-danger', :'data-confirm' => "Êtes-vous sûr?", :'data-method' => 'DELETE' %></p>
             </div>
           </div>
         </div>

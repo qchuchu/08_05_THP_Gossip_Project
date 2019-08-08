@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col mb-4">
+          <h1>Formulaire d'Inscription</h1>
+        </div>
+      </div>
+      <!-- Subscription Form with Simple Form -->
+      <%= simple_form_for @user do |f| %>
+        <!-- First and Last Name -->
+        <div class="row form-group">
+          <div class="col-md-6">
+            <%= f.input :first_name, label: 'First Name', class: 'form-control', placeholder: 'Nelson' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.input :last_name, label: 'Last Name', class: 'form-control', placeholder: 'Monfort' %>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="row form-group">
+          <div class="col">
+            <%= f.input :email, placeholder: 'nelson@monfort.com', class: 'form-control' %>
+          </div>
+        </div>
+        <!-- Password & Confirmation -->
+        <div class="row form-group">
+          <div class="col-md-6">
+            <%= f.input :password, label: 'Password', class: 'form-control' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.input :password_confirmation, label: 'Password Confirmation', class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= f.input :age, placeholder: '66', class: 'form-control' %>
+          </div>
+          <%= f.simple_fields_for :city_attributes do |c| %>
+            <div class="col-md-4">
+              <%= c.input :city_name, label: 'City', class: 'form-control', placeholder: 'Boulogne-Billancourt' %>
+            </div>
+            <div class="col-md-4">
+              <%= c.input :zip_code, label: 'Zip Code', class: 'form-control', placeholder: '92100' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <%= f.input :description, placeholder: 'This site is incroyable !', class: 'form-control' %>
+          </div>
+        </div>
+        <%= f.button :submit, class: 'btn btn-primary' %>
+        <!--  -->
+      <% end %>
+
+      <% if !@user.nil? %>
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <p>Nous n'avons pas réussi à vous enregistrer pour la (ou les) raison(s) suivante(s) :</p>
+            <ul>
+              <% @guser.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>

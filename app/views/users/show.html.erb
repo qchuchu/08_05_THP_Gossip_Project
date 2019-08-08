@@ -19,7 +19,7 @@
               <p class="card-text"><strong>Last Name : </strong><%= @user.last_name %></p>
               <p class="card-text"><strong>Description : </strong><%= @user.description %></p>
               <p class="card-text"><strong>Age : </strong><%= @user.age %></p>
-              <p class="card-text"><strong>City : </strong><%= @user.city.city_name %></p>
+              <p class="card-text"><strong>City : </strong><%= @user.city? ? @user.city.city_name : "Unknown" %></p>
             </div>
           </div>
         </div>

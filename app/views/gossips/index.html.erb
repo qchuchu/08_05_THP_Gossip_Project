@@ -6,7 +6,13 @@
   </head>
   <body>
     <div class="container text-center">
-      <h1>Welcome <%= @first_name %> !</h1>
+      <% if flash[:success] %>
+        <div class="alert alert-success" role="alert">
+          <p><%= flash[:success] %></p>
+        </div>
+      <% end %>
+      <h1>Welcome Visiteur !</h1>
+      <!-- User.find_by(id: session[:user_id]).first_name -->
       <p><%= link_to "Créer un nouveau Gossip", new_gossip_path, class: "btn btn-primary", role: "button" %></p>
       <h2>Voici la liste de tous les gossips :</h2>
     </div>
