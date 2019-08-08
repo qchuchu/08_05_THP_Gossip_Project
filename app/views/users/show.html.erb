@@ -5,13 +5,9 @@
     <title></title>
   </head>
   <body>
-    <div class="container text-center">
-      <h1>Welcome <%= @first_name %> !</h1>
-      <h2>Voici la liste de tous les gossips :</h2>
-    </div>
-
+    <h1 class='text-center'><%= @user.first_name %> <%= @user.last_name %></h1>
     <div class="container">
-      <% @gossips.each do |gossip| %>
+      <% @user.gossips.each do |gossip| %>
         <div class="card mb-3 bg-light border-primary border-left-0">
           <div class="row no-gutters">
             <div class="col-2 col-sm-1 m-auto text-center">
@@ -19,14 +15,14 @@
             </div>
             <div class="col-10 col-sm-11">
               <div class="card-body">
-                <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
-                <p class="card-text"><%= gossip.title %></p>
-                <p class="card-text"><%= link_to "Voir Gossip", gossip_path(gossip.id) %> / <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id) %></p>
+                <h5 class="card-title"><%= gossip.title %></h5>
+                <p class="card-text"><%= gossip.content %></p>
               </div>
             </div>
           </div>
         </div>
       <% end %>
+      <p><%= link_to "Retourner à la liste des gossips", gossips_path %></p>
     </div>
   </body>
 </html>

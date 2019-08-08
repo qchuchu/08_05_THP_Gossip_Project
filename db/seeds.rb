@@ -30,19 +30,23 @@ end
     content = Faker::Hipster.paragraph
     gossips << Gossip.create(title: title, content: content)
   end
-  User.all[i].gossips.push(*gossips)
+  user = User.find(i+1)
+  user.gossips.push(*gossips)
 end
 
+# Creating 10 different tags
 10.times do
   title = Faker::Hipster.word
   Tag.create(title: title)
 end
 
+# Assigning a random number of tags to each gossip
 Gossip.all.each do |gossip|
   num = rand(1..4)
   gossip.tags.push(*Tag.all.sample(num))
 end
 
+# Creating Random Private Messages and linking them to senders and recipients
 10.times do
   sender = User.all.sample
   recipients = User.all.sample(rand(1..4))
@@ -50,3 +54,26 @@ end
   pvm = PrivateMessage.create(content: content, sender: sender)
   pvm.recipients << recipients
 end
+
+# Add comments to the gossips and linking them to users
+10.times do |i|
+  2.times do
+    content = Faker::Hipster.paragraph
+    comment = Comment.create(user_id: i+1, content: content)
+    gossip = Gossip.all.sample
+    gossip.comments << comment
+  end
+end
+
+# Adding likes to comments and gossips...
+10.times do |i|
+  gossip = Gossip.all.sample
+  comment = Comment.all.sample
+  like_gossip = Like.create(user_id: i+1)
+  like_comment = Like.create(user_id: i+1)
+  gossip.likes << like_gossip
+  comment.likes << like_comment
+end
+
+# Creating the Anonymous user
+User.create(first_name: "Ano", last_name: "Nymous", description: "*Dancing on Toulouse by Nicky Romero*", email: "anonymous@anonymous.com", age: 25, city_id: 1)

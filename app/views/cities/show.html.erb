@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1><%= @city.city_name %></h1>
+      <h2>Voici la liste de tous les gossips écrits dans cette ville :</h2>
+    </div>
+
+    <div class="container">
+      <% @gossips.reverse_each do |gossip| %>
+        <div class="card mb-3 bg-light border-primary border-left-0">
+          <div class="row no-gutters">
+            <div class="col-2 col-sm-1 m-auto text-center">
+              <i class="fas fa-comment-alt fa-3x"></i>
+            </div>
+            <div class="col-10 col-sm-11">
+              <div class="card-body">
+                <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
+                <p class="card-text"><%= gossip.title %></p>
+                <p class="card-text"><%= link_to "Voir Gossip", gossip_path(gossip.id), :class => 'btn btn-primary' %> <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id), :class => 'btn btn-primary' %> <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <p> <%= link_to "Retourner à la liste des gossips", gossips_path, :class => 'btn btn-success' %>
+    </div>
+
+  </body>
+</html>

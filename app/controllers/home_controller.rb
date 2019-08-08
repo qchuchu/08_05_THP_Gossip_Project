@@ -4,6 +4,6 @@ class HomeController < ApplicationController
 
   def create
     session[:username] = params['username']
-    redirect_to "/welcome/#{session[:username]}"
+    redirect_to gossips_path
   end
 end
