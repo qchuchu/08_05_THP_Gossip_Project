@@ -10,11 +10,14 @@ class GossipsController < ApplicationController
   end
 
   def new
+    @tags = Tag.all
   end
 
   def create
+    tags = Tag.where(id: params[:tags])
     @gossip = Gossip.new(title: params[:title], content: params[:content])
     @gossip.user = User.find_by(first_name: 'Ano', last_name: 'Nymous')
+    @gossip.tags << tags
     if @gossip.save
       redirect_to gossips_path
     else

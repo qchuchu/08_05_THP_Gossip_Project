@@ -20,9 +20,12 @@
           <%= text_area_tag 'content',nil, class: 'form-control', placeholder: 'Enter Content' %>
         </div>
         <div class="form-group">
+          <%= label_tag 'tags' %>
+          <%= select_tag 'tags', options_for_select(@tags.collect{ |u| [u.title, u.id] }), multiple: true, class: 'custom-select' %>
+        </div>
+        <div class="form-group">
           <%= submit_tag "Create Post", class: 'btn btn-primary' %>
         </div>
-
 
       <% end %>
       <br />
@@ -40,7 +43,7 @@
         <% end %>
       <% end %>
 
-      <%= link_to 'Retourner à la liste des Gossips', gossips_path %>
+      <p><%= link_to "Retourner à la liste des gossips", gossips_path, :class => 'btn btn-success' %></p>
     </div>
   </body>
 </html>

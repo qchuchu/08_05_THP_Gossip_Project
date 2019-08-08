@@ -20,4 +20,11 @@ class CommentsController < ApplicationController
     @comment.update(comment_params)
     redirect_to gossip_path(@comment.commentable_id)
   end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    gossip_id = Gossip.find(@comment.commentable_id).id
+    @comment.destroy
+    redirect_to gossip_path(gossip_id)
+  end
 end

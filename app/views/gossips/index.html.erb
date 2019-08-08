@@ -22,6 +22,7 @@
               <div class="card-body">
                 <h5 class="card-title"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5>
                 <p class="card-text"><%= gossip.title %></p>
+                <p class="card-text"><strong>Nombre de commentaires : </strong><%= gossip.comments.count %></p>
                 <p class="card-text"><%= link_to "Voir Gossip", gossip_path(gossip.id), :class => 'btn btn-primary' %> <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id), :class => 'btn btn-primary' %> <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %></p>
               </div>
             </div>
