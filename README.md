@@ -1,8 +1,11 @@
 # ___THP - The Gossip Project___
 
 > Creation Date : 2019/08/05 </br>
+
 > Last Update Date : 2019/08/08 </br>
+
 > Author : Quentin Churet </br>
+
 > **Description** : This WebApp Rails have been created for the 5th week of The Hacking Project. It's a small Social Network where people can publish gossips, comment them and like them. </br>
 
 -------------------------------------------------------
