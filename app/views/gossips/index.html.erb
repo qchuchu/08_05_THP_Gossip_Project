@@ -32,13 +32,13 @@
                 <p class="card-text">
                   <%= link_to "Voir Gossip", gossip_path(gossip.id), :class => 'btn btn-primary' %>
                   <%= link_to "Voir le profil de l'auteur", user_path(gossip.user.id), :class => 'btn btn-primary' %>
+                  <% if current_user == gossip.user %>
+                    <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %>
+                  <% end %>
                   <% if gossip.is_liked?(current_user) %>
                     <%= link_to "Je n'aime plus (#{gossip.num_likes})", gossip_like_path(gossip.id, gossip.like_id(current_user)), :class => 'btn btn-danger', method: 'delete' %>
                   <% else %>
                     <%= link_to "J'aime (#{gossip.num_likes})", gossip_likes_path(gossip.id), :class => 'btn btn-success', method: 'post' %>
-                  <% end %>
-                  <% if current_user == gossip.user %>
-                    <%= link_to "Modifier le gossip", edit_gossip_path(gossip.id), :class => 'btn btn-warning' %>
                   <% end %>
                 </p>
               </div>

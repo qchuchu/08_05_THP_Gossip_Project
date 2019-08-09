@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'pry'
 
-DatabaseCleaner.clean_with(:truncation)
+# DatabaseCleaner.clean_with(:truncation)
 
 10.times do |i|
   address = Faker::Address
